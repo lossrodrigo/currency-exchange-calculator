@@ -13,13 +13,10 @@ class MainScreenViewModel: ViewModel() {
 
 
     private val _currencies = MutableLiveData<CurrencyList>()
-    val currencies: LiveData<CurrencyList> = _currencies
 
     private val _baseCurrency = MutableLiveData<String>()
-    val baseCurrency: LiveData<String> = _baseCurrency
 
     private val _targetCurrency = MutableLiveData<String>()
-    val targetCurrency: LiveData<String> = _targetCurrency
 
     private var _editTextBaseValue = MutableLiveData<String>()
     val editTextBaseValue: LiveData<String> = _editTextBaseValue
@@ -28,7 +25,6 @@ class MainScreenViewModel: ViewModel() {
     val editTextTargetValue: LiveData<String> = _editTextTargetValue
 
     private val _response = MutableLiveData<String>()
-    val response: LiveData<String> = _response
 
     var baseFlag: Int = 0
     var targetFlag: Int = 0

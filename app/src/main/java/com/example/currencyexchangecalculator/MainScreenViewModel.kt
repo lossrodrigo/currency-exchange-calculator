@@ -1,9 +1,5 @@
 package com.example.currencyexchangecalculator
 
-import android.app.Activity
-import android.app.ActivityManager
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,9 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.currencyexchangecalculator.network.CurrenciesQuotationsApi
 import com.example.currencyexchangecalculator.network.CurrencyList
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import kotlin.coroutines.coroutineContext
-import kotlin.math.round
 import kotlin.math.roundToInt
 
 class MainScreenViewModel: ViewModel() {

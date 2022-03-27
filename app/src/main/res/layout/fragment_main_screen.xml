@@ -12,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
+        android:paddingTop="16dp"
         tools:context=".MainScreenFragment">
 
 
@@ -21,21 +22,20 @@
             android:layout_width="match_parent"
             android:layout_height="156dp"
             android:layout_margin="8dp"
-            app:cardElevation="9dp"
+            app:cardElevation="18dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cardViewTarget">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageViewBase"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="16dp"
+                    style="@style/ShapeableImageView"
                     tools:src="@drawable/ic_br"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -43,20 +43,30 @@
 
                     />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editTextBase"
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:onClick="@{() -> viewmodel.onClickEditTextBaseValue()}"
-                    android:text="@{viewmodel.editTextBaseValue}"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewBase"
-                    app:layout_constraintTop_toTopOf="@+id/imageViewBase" />
-
-                <Spinner
-                    android:id="@+id/spinnerBaseCurrency"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:hint="VALUE"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageViewBase"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewBase"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.editTextBaseValue}"
+                        android:onClick="@{() -> viewmodel.onClickEditTextBaseValue()}"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinnerBaseCurrency"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
                     android:entries="@array/currencies_array_base"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewBase"
                     app:layout_constraintEnd_toEndOf="@+id/editTextBase"
@@ -69,9 +79,11 @@
             android:id="@+id/cardViewTarget"
             android:layout_width="match_parent"
             android:layout_height="156dp"
-            android:layout_margin="8dp"
-            app:cardElevation="9dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="15dp"
+            app:cardElevation="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardViewBase">
@@ -80,30 +92,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageViewTarget"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="16dp"
-                    tools:src="@drawable/ic_ar"
+                    style="@style/ShapeableImageView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_ar" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editTextTarget"
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:onClick="@{() -> viewmodel.onClickEditTextTargetValue()}"
-                    android:text="@{viewmodel.editTextTargetValue}"
-                    app:layout_constraintStart_toEndOf="@id/imageViewTarget"
-                    app:layout_constraintTop_toTopOf="@+id/imageViewTarget" />
-
-                <Spinner
-                    android:id="@+id/spinnerTargetCurrency"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="EXCHANGE"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageViewTarget"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewTarget">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:onClick="@{() -> viewmodel.onClickEditTextTargetValue()}"
+                        android:text="@{viewmodel.editTextTargetValue}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinnerTargetCurrency"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
                     android:entries="@array/currencies_array_target"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewTarget"
                     app:layout_constraintEnd_toEndOf="@id/editTextTarget"

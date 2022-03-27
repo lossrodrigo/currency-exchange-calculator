@@ -1,5 +1,7 @@
 package com.example.currencyexchangecalculator
 
+import android.icu.number.NumberFormatter
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +9,21 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.currencyexchangecalculator.databinding.FragmentMainScreenBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 
 class MainScreenFragment : Fragment() {
 
     private val viewModel: MainScreenViewModel by viewModels()
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +42,7 @@ class MainScreenFragment : Fragment() {
         val spinnerBase: Spinner = binding.spinnerBaseCurrency
         val spinnerTarget: Spinner = binding.spinnerTargetCurrency
 
-        // edit text base and target value passing to viewmodel
+        // edit text base and target value sent to viewmodel
         var etBaseValue: String
         var etTargetValue: String
 
@@ -98,30 +105,13 @@ class MainScreenFragment : Fragment() {
         })
 
 
-        // listener to clean the edit text when on focus
-        binding.editTextBase.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus){
-                etBaseValue = ""
-                etTargetValue = ""
-                viewModel.clearInput(etBaseValue, etTargetValue)
-            }
-        }
-
-        binding.editTextTarget.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus){
-                etTargetValue = ""
-                etTargetValue = ""
-                viewModel.clearInput(etTargetValue, etTargetValue)
-            }
-        }
-
         //Observing changes in base and target values
         viewModel._onChangeBaseEt.observe(viewLifecycleOwner, Observer { status ->
             status?.let {
-                var etBaseValue: String
 
-                if (binding.editTextBase.text.toString() != ""){
-                    etBaseValue = binding.editTextBase.text.toString()
+                if (binding.editTextBase.editText?.text.toString() != ""){
+                    etBaseValue = binding.editTextBase.editText?.text.toString()
+                    if (etBaseValue.contains(",")) etBaseValue = etBaseValue.replace(",", ".")
                     viewModel.setEtBaseValue(etBaseValue.toDouble())
                 }else{
                     etBaseValue = "0.00"
@@ -132,9 +122,10 @@ class MainScreenFragment : Fragment() {
 
         viewModel._onChangeTargetEt.observe(viewLifecycleOwner, Observer { status ->
             status?.let {
-                var etTargetValue: String
-                if (binding.editTextTarget.text.toString() != ""){
-                    etTargetValue = binding.editTextTarget.text.toString()
+
+                if (binding.editTextTarget.editText?.text.toString() != ""){
+                    etTargetValue = binding.editTextTarget.editText?.text.toString()
+                    if (etTargetValue.contains(",")) etTargetValue = etTargetValue.replace(",",".")
                     viewModel.setEtTargetValue(etTargetValue.toDouble())
                 }else{
                     etTargetValue = "0.00"
@@ -142,6 +133,23 @@ class MainScreenFragment : Fragment() {
                 }
             }
         })
+
+        // listener to clean the edit text when on focus
+        binding.editTextBase.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if(hasFocus){
+                etBaseValue = ""
+                etTargetValue = ""
+                viewModel.clearInput(etBaseValue, etTargetValue)
+            }
+        }
+
+        binding.editTextTarget.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if(hasFocus){
+                etTargetValue = ""
+                etTargetValue = ""
+                viewModel.clearInput(etTargetValue, etTargetValue)
+            }
+        }
 
         //observing changing on the flags
         viewModel._onChangeFlag.observe(viewLifecycleOwner, Observer { status ->

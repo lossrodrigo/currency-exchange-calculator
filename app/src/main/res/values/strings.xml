@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Currency Exchange Calculator</string>
+    <string name="app_name">Currency Exchange</string>
     <string-array name="currencies_array_base">
         <item>Brazilian Real (BRL)</item>
         <item>Euro (EUR)</item>
@@ -212,4 +212,7 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type_your_currency">Type your currency</string>
+    <string name="type_the_value">Type the value</string>
+    <string name="Value">Value</string>
 </resources>

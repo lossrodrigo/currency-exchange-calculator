@@ -1,5 +1,8 @@
 package com.example.currencyexchangecalculator
 
+import android.icu.number.NumberFormatter
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.currencyexchangecalculator.network.CurrenciesQuotationsApi
 import com.example.currencyexchangecalculator.network.CurrencyList
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 class MainScreenViewModel: ViewModel() {
@@ -102,28 +107,37 @@ class MainScreenViewModel: ViewModel() {
     }
 
     //setting base and target values
-    fun setEtBaseValue(etBaseValue: Double) {
-        _editTextBaseValue.value = "%.2f".format(etBaseValue)
+    fun setEtBaseValue(etBaseValue:Double) {
+        var etBaseValueStg = "%.2f".format(etBaseValue)
+        etBaseValueStg = etBaseValueStg.replace(",",".")
+        _editTextBaseValue.value = etBaseValueStg
     }
 
     fun setEtTargetValue(etTargetValue: Double) {
-        _editTextTargetValue.value = "%.2f".format(etTargetValue)
+        var etTargetValueStg = "%.2f".format(etTargetValue)
+        etTargetValueStg = etTargetValueStg.replace(",",".")
+        _editTextTargetValue.value = etTargetValueStg
     }
 
     private fun calcResult() {
         var result: Double
+        var resultStg: String
 
         if (_onChangeBaseEt.value == true) {
             editTextBaseValueDouble = _editTextBaseValue.value?.toDouble()!!
             result = (editTextBaseValueDouble * targetCurrencyValue / baseCurrencyValue * 100.0).roundToInt() / 100.0
-            _editTextTargetValue.value = "%.2f".format(result)
+            resultStg = "%.2f".format(result)
+            resultStg = resultStg.replace(",", ".")
+            _editTextTargetValue.value = resultStg
 
         }
 
         if (_onChangeTargetEt.value == true){
             editTextTargetValueDouble = _editTextTargetValue.value?.toDouble()!!
             result = (editTextTargetValueDouble * baseCurrencyValue / targetCurrencyValue * 100.0).roundToInt() / 100.0
-            _editTextBaseValue.value = "%.2f".format(result)
+            resultStg = "%.2f".format(result)
+            resultStg = resultStg.replace(",", ".")
+            _editTextBaseValue.value =resultStg
         }
     }
 

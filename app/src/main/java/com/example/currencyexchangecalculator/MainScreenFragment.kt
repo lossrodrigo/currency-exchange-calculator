@@ -1,6 +1,5 @@
 package com.example.currencyexchangecalculator
 
-import android.icu.number.NumberFormatter
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +8,12 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.currencyexchangecalculator.databinding.FragmentMainScreenBinding
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
 
 
 class MainScreenFragment : Fragment() {
@@ -108,28 +105,30 @@ class MainScreenFragment : Fragment() {
         //Observing changes in base and target values
         viewModel._onChangeBaseEt.observe(viewLifecycleOwner, Observer { status ->
             status?.let {
+                etBaseValue = binding.editTextBase.editText?.text.toString()
+                etBaseValue = etBaseValue.replace(",", ".")
 
-                if (binding.editTextBase.editText?.text.toString() != ""){
-                    etBaseValue = binding.editTextBase.editText?.text.toString()
-                    if (etBaseValue.contains(",")) etBaseValue = etBaseValue.replace(",", ".")
+                try{
                     viewModel.setEtBaseValue(etBaseValue.toDouble())
-                }else{
+                }catch (numberFormatException: NumberFormatException){
                     etBaseValue = "0.00"
                     viewModel.setEtBaseValue(etBaseValue.toDouble())
+                    Toast.makeText(activity, "Type a valid number", Toast.LENGTH_SHORT).show()
                 }
             }
         })
 
         viewModel._onChangeTargetEt.observe(viewLifecycleOwner, Observer { status ->
             status?.let {
+                etTargetValue = binding.editTextTarget.editText?.text.toString()
+                etTargetValue = etTargetValue.replace(",",".")
 
-                if (binding.editTextTarget.editText?.text.toString() != ""){
-                    etTargetValue = binding.editTextTarget.editText?.text.toString()
-                    if (etTargetValue.contains(",")) etTargetValue = etTargetValue.replace(",",".")
+                try {
                     viewModel.setEtTargetValue(etTargetValue.toDouble())
-                }else{
+                }catch (numberFormatException: NumberFormatException){
                     etTargetValue = "0.00"
                     viewModel.setEtTargetValue(etTargetValue.toDouble())
+                    Toast.makeText(activity, "Type a valid number", Toast.LENGTH_LONG).show()
                 }
             }
         })

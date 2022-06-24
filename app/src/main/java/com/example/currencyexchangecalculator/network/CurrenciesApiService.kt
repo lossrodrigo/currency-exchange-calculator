@@ -22,7 +22,7 @@ private val retrofit = Retrofit.Builder()
 //retrofit service
 interface CurrenciesApiService {
 
-    @GET("latest?access_key=a8046993c0f47105fae2268cc5b32755")
+    @GET("latest?access_key=039bcf853910247ad6d1772b9033902a&format=1")
     suspend fun getCurrenciesQuotations(): CurrencyList
 }
 

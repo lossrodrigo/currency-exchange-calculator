@@ -1,8 +1,5 @@
 package com.example.currencyexchangecalculator
 
-import android.icu.number.NumberFormatter
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,12 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.currencyexchangecalculator.network.CurrenciesQuotationsApi
 import com.example.currencyexchangecalculator.network.CurrencyList
 import kotlinx.coroutines.launch
-import java.text.NumberFormat
-import java.util.*
 import kotlin.math.roundToInt
 
-class MainScreenViewModel: ViewModel() {
-
+class MainScreenViewModel : ViewModel() {
 
     private val _currencies = MutableLiveData<CurrencyList>()
 
@@ -55,6 +49,7 @@ class MainScreenViewModel: ViewModel() {
         _baseCurrency.value = baseCurrency
         setFlag()
     }
+
     fun setTargetCurrencyCommunicator(targetCurrency: String) {
         _targetCurrency.value = targetCurrency
         setFlag()
@@ -100,7 +95,7 @@ class MainScreenViewModel: ViewModel() {
             "Pound sterling (GBP)" -> baseCurrencyValue = _currencies.value!!.rates.gbp
             "Brazilian Real (BRL)" -> baseCurrencyValue = _currencies.value!!.rates.brl
             "Argentine Peso (Peso)" -> baseCurrencyValue = _currencies.value!!.rates.ars
-            "Argentine Blue Peso (Peso)" -> baseCurrencyValue = 2*(_currencies.value!!.rates.ars)
+            "Argentine Blue Peso (Peso)" -> baseCurrencyValue = 2 * (_currencies.value!!.rates.ars)
             "Canadian Dollar (CAD)" -> baseCurrencyValue = _currencies.value!!.rates.cad
         }
         when (_targetCurrency.value.toString()) {
@@ -109,7 +104,7 @@ class MainScreenViewModel: ViewModel() {
             "Pound sterling (GBP)" -> targetCurrencyValue = _currencies.value!!.rates.gbp
             "Brazilian Real (BRL)" -> targetCurrencyValue = _currencies.value!!.rates.brl
             "Argentine Peso (Peso)" -> targetCurrencyValue = _currencies.value!!.rates.ars
-            "Argentine Blue Peso (Peso)" -> targetCurrencyValue = 2*(_currencies.value!!.rates.ars)
+            "Argentine Blue Peso (Peso)" -> targetCurrencyValue = 2 * (_currencies.value!!.rates.ars)
             "Canadian Dollar (CAD)" -> targetCurrencyValue = _currencies.value!!.rates.cad
         }
     }
@@ -117,15 +112,15 @@ class MainScreenViewModel: ViewModel() {
     /**
      * Setting etBaseValue and etTargetValue
      */
-    fun setEtBaseValue(etBaseValue:Double) {
+    fun setEtBaseValue(etBaseValue: Double) {
         var etBaseValueStg = "%.2f".format(etBaseValue)
-        etBaseValueStg = etBaseValueStg.replace(",",".")
+        etBaseValueStg = etBaseValueStg.replace(",", ".")
         _editTextBaseValue.value = etBaseValueStg
     }
 
     fun setEtTargetValue(etTargetValue: Double) {
         var etTargetValueStg = "%.2f".format(etTargetValue)
-        etTargetValueStg = etTargetValueStg.replace(",",".")
+        etTargetValueStg = etTargetValueStg.replace(",", ".")
         _editTextTargetValue.value = etTargetValueStg
     }
 
@@ -138,28 +133,30 @@ class MainScreenViewModel: ViewModel() {
 
         if (_onChangeBaseEt.value == true) {
             editTextBaseValueDouble = _editTextBaseValue.value?.toDouble()!!
-            result = (editTextBaseValueDouble * targetCurrencyValue / baseCurrencyValue * 100.0).roundToInt() / 100.0
+            result =
+                (editTextBaseValueDouble * targetCurrencyValue / baseCurrencyValue * 100.0).roundToInt() / 100.0
             resultStg = "%.2f".format(result)
             resultStg = resultStg.replace(",", ".")
             _editTextTargetValue.value = resultStg
 
         }
 
-        if (_onChangeTargetEt.value == true){
+        if (_onChangeTargetEt.value == true) {
             editTextTargetValueDouble = _editTextTargetValue.value?.toDouble()!!
-            result = (editTextTargetValueDouble * baseCurrencyValue / targetCurrencyValue * 100.0).roundToInt() / 100.0
+            result =
+                (editTextTargetValueDouble * baseCurrencyValue / targetCurrencyValue * 100.0).roundToInt() / 100.0
             resultStg = "%.2f".format(result)
             resultStg = resultStg.replace(",", ".")
-            _editTextBaseValue.value =resultStg
+            _editTextBaseValue.value = resultStg
         }
     }
 
     /**
      * Clear edit text when on focus
      */
-    fun clearInput(etBaseValue: String, etTargetValue: String) {
-        _editTextBaseValue.value = etBaseValue
-        _editTextTargetValue.value = etTargetValue
+    fun clearInput() {
+        _editTextBaseValue.value = ""
+        _editTextTargetValue.value = ""
     }
 
     /**

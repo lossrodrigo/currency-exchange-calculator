@@ -2,6 +2,7 @@ package com.example.currencyexchangecalculator
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,33 +15,39 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.currencyexchangecalculator.databinding.FragmentMainScreenBinding
 
+const val KEY_ETBASEVALUE = "key_etBaseValue"
+const val KEY_ETTARGETVALUE = "key_etTargetValue"
 
 class MainScreenFragment : Fragment() {
 
     private val viewModel: MainScreenViewModel by viewModels()
+
+    // edit text base and target value sent to viewmodel
+    var etBaseValue = ""
+    var etTargetValue = ""
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         var baseCurrency: String
         var targetCurrency: String
 
+
+
         // Inflate the layout for this fragment
         val binding = FragmentMainScreenBinding.inflate(inflater)
-        //binding lifecycle
-        binding.lifecycleOwner = this
-        //binding viewModel
-        binding.viewmodel = viewModel
 
         //Created spinnerBase and spinnerTarget
         val spinnerBase: Spinner = binding.spinnerBaseCurrency
         val spinnerTarget: Spinner = binding.spinnerTargetCurrency
 
-        // edit text base and target value sent to viewmodel
-        var etBaseValue: String
-        var etTargetValue: String
+        //binding lifecycle
+        binding.lifecycleOwner = this
+        //binding viewModel
+        binding.viewmodel = viewModel
 
         /**
          * Create Spinner Base
@@ -103,7 +110,6 @@ class MainScreenFragment : Fragment() {
 
         })
 
-
         /**
          * Observing changes in etBaseValue and etTargetValue
          */
@@ -112,9 +118,9 @@ class MainScreenFragment : Fragment() {
                 etBaseValue = binding.editTextBase.editText?.text.toString()
                 etBaseValue = etBaseValue.replace(",", ".")
 
-                try{
+                try {
                     viewModel.setEtBaseValue(etBaseValue.toDouble())
-                }catch (numberFormatException: NumberFormatException){
+                } catch (numberFormatException: NumberFormatException) {
                     etBaseValue = "0.00"
                     viewModel.setEtBaseValue(etBaseValue.toDouble())
                     Toast.makeText(activity, "Type a valid number", Toast.LENGTH_SHORT).show()
@@ -124,11 +130,11 @@ class MainScreenFragment : Fragment() {
         viewModel._onChangeTargetEt.observe(viewLifecycleOwner, { status ->
             status?.let {
                 etTargetValue = binding.editTextTarget.editText?.text.toString()
-                etTargetValue = etTargetValue.replace(",",".")
+                etTargetValue = etTargetValue.replace(",", ".")
 
                 try {
                     viewModel.setEtTargetValue(etTargetValue.toDouble())
-                }catch (numberFormatException: NumberFormatException){
+                } catch (numberFormatException: NumberFormatException) {
                     etTargetValue = "0.00"
                     viewModel.setEtTargetValue(etTargetValue.toDouble())
                     Toast.makeText(activity, "Type a valid number", Toast.LENGTH_LONG).show()
@@ -140,17 +146,14 @@ class MainScreenFragment : Fragment() {
          * Listener to clean the editTextBase and etTargetValue when on focus
          */
         binding.editTextBase.editText?.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus){
-                etBaseValue = ""
-                etTargetValue = ""
-                viewModel.clearInput(etBaseValue, etTargetValue)
+            if (hasFocus) {
+                viewModel.clearInput()
             }
         }
+
         binding.editTextTarget.editText?.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus){
-                etBaseValue = ""
-                etTargetValue = ""
-                viewModel.clearInput(etTargetValue, etTargetValue)
+            if (hasFocus) {
+                viewModel.clearInput()
             }
         }
 
@@ -158,16 +161,15 @@ class MainScreenFragment : Fragment() {
          * Observing changing on the flags
          */
         viewModel._onChangeFlag.observe(viewLifecycleOwner, { status ->
-            status?.let{
-                etBaseValue = ""
-                etTargetValue = ""
+            status?.let {
                 binding.imageViewBase.setImageResource(viewModel.baseFlag)
                 binding.imageViewTarget.setImageResource(viewModel.targetFlag)
-                viewModel.clearInput(etBaseValue, etTargetValue)
+                viewModel.clearInput()
             }
         })
 
 
         return binding.root
     }
+
 }

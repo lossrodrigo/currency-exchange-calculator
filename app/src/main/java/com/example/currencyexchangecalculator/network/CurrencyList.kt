@@ -1,7 +1,6 @@
 package com.example.currencyexchangecalculator.network
 
 import com.squareup.moshi.Json
-import retrofit2.Call
 
 data class CurrencyList(
     val success: Boolean,

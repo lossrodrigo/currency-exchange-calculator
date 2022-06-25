@@ -48,18 +48,21 @@ class MainScreenViewModel: ViewModel() {
         currencyQuotation()
     }
 
-    //receiving base currency chose from spinner in the fragment
+    /**
+     * Receiving baseCurrency and targetCurrency chose from spinner in the fragment
+     */
     fun setBaseCurrencyCommunicator(baseCurrency: String) {
         _baseCurrency.value = baseCurrency
         setFlag()
     }
-
-    //receiving target currency chose from spinner in the fragment
     fun setTargetCurrencyCommunicator(targetCurrency: String) {
         _targetCurrency.value = targetCurrency
         setFlag()
     }
 
+    /**
+     * Receiving currencies quotation from third API using coroutine
+     */
     private fun currencyQuotation() {
         viewModelScope.launch {
             try {
@@ -86,14 +89,18 @@ class MainScreenViewModel: ViewModel() {
         _onChangeTargetEt.value = false
     }
 
-    //defining base currency and target currency
+    /**
+     * Defining baseCurrencyValue and targetCurrencyValue based on _baseCurrency and
+     * _targetCurrency User choices
+     */
     private fun inputBaseAndTargetCurrency() {
         when (_baseCurrency.value.toString()) {
             "Euro (EUR)" -> baseCurrencyValue = _currencies.value!!.rates.eur
             "United States Dollar (USD)" -> baseCurrencyValue = _currencies.value!!.rates.usd
             "Pound sterling (GBP)" -> baseCurrencyValue = _currencies.value!!.rates.gbp
             "Brazilian Real (BRL)" -> baseCurrencyValue = _currencies.value!!.rates.brl
-            "Argentina (Peso)" -> baseCurrencyValue = _currencies.value!!.rates.ars
+            "Argentine Peso (Peso)" -> baseCurrencyValue = _currencies.value!!.rates.ars
+            "Argentine Blue Peso (Peso)" -> baseCurrencyValue = 2*(_currencies.value!!.rates.ars)
             "Canadian Dollar (CAD)" -> baseCurrencyValue = _currencies.value!!.rates.cad
         }
         when (_targetCurrency.value.toString()) {
@@ -101,12 +108,15 @@ class MainScreenViewModel: ViewModel() {
             "United States Dollar (USD)" -> targetCurrencyValue = _currencies.value!!.rates.usd
             "Pound sterling (GBP)" -> targetCurrencyValue = _currencies.value!!.rates.gbp
             "Brazilian Real (BRL)" -> targetCurrencyValue = _currencies.value!!.rates.brl
-            "Argentina (Peso)" -> targetCurrencyValue = _currencies.value!!.rates.ars
+            "Argentine Peso (Peso)" -> targetCurrencyValue = _currencies.value!!.rates.ars
+            "Argentine Blue Peso (Peso)" -> targetCurrencyValue = 2*(_currencies.value!!.rates.ars)
             "Canadian Dollar (CAD)" -> targetCurrencyValue = _currencies.value!!.rates.cad
         }
     }
 
-    //setting base and target values
+    /**
+     * Setting etBaseValue and etTargetValue
+     */
     fun setEtBaseValue(etBaseValue:Double) {
         var etBaseValueStg = "%.2f".format(etBaseValue)
         etBaseValueStg = etBaseValueStg.replace(",",".")
@@ -119,6 +129,9 @@ class MainScreenViewModel: ViewModel() {
         _editTextTargetValue.value = etTargetValueStg
     }
 
+    /**
+     * Calculate the result
+     */
     private fun calcResult() {
         var result: Double
         var resultStg: String
@@ -141,20 +154,25 @@ class MainScreenViewModel: ViewModel() {
         }
     }
 
-    //clear edit text when on focus
+    /**
+     * Clear edit text when on focus
+     */
     fun clearInput(etBaseValue: String, etTargetValue: String) {
         _editTextBaseValue.value = etBaseValue
         _editTextTargetValue.value = etTargetValue
     }
 
-    //defining flags
+    /**
+     * Defining flags
+     */
     private fun setFlag() {
         when (_baseCurrency.value.toString()) {
             "Euro (EUR)" -> baseFlag = R.drawable.ic_eu
             "United States Dollar (USD)" -> baseFlag = R.drawable.ic_us
             "Pound sterling (GBP)" -> baseFlag = R.drawable.ic_gb
             "Brazilian Real (BRL)" -> baseFlag = R.drawable.ic_br
-            "Argentina (Peso)" -> baseFlag = R.drawable.ic_ar
+            "Argentine Peso (Peso)" -> baseFlag = R.drawable.ic_ar
+            "Argentine Blue Peso (Peso)" -> baseFlag = R.drawable.ic_ar
             "Canadian Dollar (CAD)" -> baseFlag = R.drawable.ic_ca
         }
 
@@ -163,7 +181,8 @@ class MainScreenViewModel: ViewModel() {
             "United States Dollar (USD)" -> targetFlag = R.drawable.ic_us
             "Pound sterling (GBP)" -> targetFlag = R.drawable.ic_gb
             "Brazilian Real (BRL)" -> targetFlag = R.drawable.ic_br
-            "Argentina (Peso)" -> targetFlag = R.drawable.ic_ar
+            "Argentine Peso (Peso)" -> targetFlag = R.drawable.ic_ar
+            "Argentine Blue Peso (Peso)" -> targetFlag = R.drawable.ic_ar
             "Canadian Dollar (CAD)" -> targetFlag = R.drawable.ic_ca
         }
         _onChangeFlag.value = true

@@ -5,12 +5,14 @@
         <item>Euro (EUR)</item>
         <item>United States Dollar (USD)</item>
         <item>Pound sterling (GBP)</item>
-        <item>Argentina (Peso)</item>
+        <item>Argentine Peso (Peso)</item>
+        <item>Argentine Blue Peso (Peso)</item>
         <item>Canadian Dollar (CAD)</item>
     </string-array>
 
     <string-array name="currencies_array_target">
-        <item>Argentina (Peso)</item>
+        <item>Argentine Peso (Peso)</item>
+        <item>Argentine Blue Peso (Peso)</item>
         <item>Euro (EUR)</item>
         <item>United States Dollar (USD)</item>
         <item>Pound sterling (GBP)</item>

@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.currencyexchangecalculator.databinding.FragmentMainScreenBinding
 
 
@@ -24,9 +23,9 @@ class MainScreenFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var baseCurrency = "EUR"
-        var targetCurrency = "USD"
+    ): View {
+        var baseCurrency: String
+        var targetCurrency: String
 
         // Inflate the layout for this fragment
         val binding = FragmentMainScreenBinding.inflate(inflater)
@@ -43,7 +42,9 @@ class MainScreenFragment : Fragment() {
         var etBaseValue: String
         var etTargetValue: String
 
-
+        /**
+         * Create Spinner Base
+         */
         //createFromresource para pegar a lista de arrays de string local
         ArrayAdapter.createFromResource(
             requireActivity(),
@@ -55,18 +56,6 @@ class MainScreenFragment : Fragment() {
             //Apply the adapter to the spinner
             spinnerBase.adapter = adapter
         }
-
-        ArrayAdapter.createFromResource(
-            requireActivity(),
-            R.array.currencies_array_target,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            //Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            //Apply the adapter to the spinner
-            spinnerTarget.adapter = adapter
-        }
-
         spinnerBase.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -84,6 +73,19 @@ class MainScreenFragment : Fragment() {
 
         })
 
+        /**
+         * Create Spinner Target
+         */
+        ArrayAdapter.createFromResource(
+            requireActivity(),
+            R.array.currencies_array_target,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            //Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            //Apply the adapter to the spinner
+            spinnerTarget.adapter = adapter
+        }
         spinnerTarget.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -102,8 +104,10 @@ class MainScreenFragment : Fragment() {
         })
 
 
-        //Observing changes in base and target values
-        viewModel._onChangeBaseEt.observe(viewLifecycleOwner, Observer { status ->
+        /**
+         * Observing changes in etBaseValue and etTargetValue
+         */
+        viewModel._onChangeBaseEt.observe(viewLifecycleOwner, { status ->
             status?.let {
                 etBaseValue = binding.editTextBase.editText?.text.toString()
                 etBaseValue = etBaseValue.replace(",", ".")
@@ -117,8 +121,7 @@ class MainScreenFragment : Fragment() {
                 }
             }
         })
-
-        viewModel._onChangeTargetEt.observe(viewLifecycleOwner, Observer { status ->
+        viewModel._onChangeTargetEt.observe(viewLifecycleOwner, { status ->
             status?.let {
                 etTargetValue = binding.editTextTarget.editText?.text.toString()
                 etTargetValue = etTargetValue.replace(",",".")
@@ -133,7 +136,9 @@ class MainScreenFragment : Fragment() {
             }
         })
 
-        // listener to clean the edit text when on focus
+        /**
+         * Listener to clean the editTextBase and etTargetValue when on focus
+         */
         binding.editTextBase.editText?.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus){
                 etBaseValue = ""
@@ -141,17 +146,18 @@ class MainScreenFragment : Fragment() {
                 viewModel.clearInput(etBaseValue, etTargetValue)
             }
         }
-
         binding.editTextTarget.editText?.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus){
-                etTargetValue = ""
+                etBaseValue = ""
                 etTargetValue = ""
                 viewModel.clearInput(etTargetValue, etTargetValue)
             }
         }
 
-        //observing changing on the flags
-        viewModel._onChangeFlag.observe(viewLifecycleOwner, Observer { status ->
+        /**
+         * Observing changing on the flags
+         */
+        viewModel._onChangeFlag.observe(viewLifecycleOwner, { status ->
             status?.let{
                 etBaseValue = ""
                 etTargetValue = ""

@@ -7,131 +7,140 @@
 
         <variable
             name="viewmodel"
-            type="com.example.currencyexchangecalculator.MainScreenViewModel" />
+            type="com.currencyexchangeapp.currencyexchangecalculator.MainScreenViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:paddingTop="16dp"
-        tools:context=".MainScreenFragment">
+        android:layout_marginBottom="16dp"
+        tools:context="com.currencyexchangeapp.currencyexchangecalculator.MainScreenFragment">
 
+        <include layout="@layout/toolbar"/>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewBase"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="156dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="18dp"
-            app:layout_constraintBottom_toTopOf="@id/cardViewTarget"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageViewBase"
-                    style="@style/ShapeableImageView"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_br"
-
-                    />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/editTextBase"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:hint="@string/value"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageViewBase"
-                    app:layout_constraintTop_toTopOf="@+id/imageViewBase">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:onClick="@{() -> viewmodel.onClickEditTextBaseValue()}"
-                        android:text="@{viewmodel.editTextBaseValue}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerBaseCurrency"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:entries="@array/currencies_array_base"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageViewBase"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextBase"
-                    app:layout_constraintStart_toStartOf="@id/editTextBase"
-                    app:layout_constraintTop_toBottomOf="@id/editTextBase" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewTarget"
-            android:layout_width="match_parent"
-            android:layout_height="156dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="18dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewBase">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="64dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewBase"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="156dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="18dp"
+                app:layout_constraintBottom_toTopOf="@id/cardViewTarget"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageViewTarget"
-                    style="@style/ShapeableImageView"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_ar" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/editTextTarget"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:hint="@string/exchange"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageViewTarget"
-                    app:layout_constraintTop_toTopOf="@+id/imageViewTarget">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imageViewBase"
+                        style="@style/ShapeableImageView"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_br"
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/editTextBase"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:onClick="@{() -> viewmodel.onClickEditTextTargetValue()}"
-                        android:text="@{viewmodel.editTextTargetValue}" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imageViewBase"
+                        app:layout_constraintTop_toTopOf="@+id/imageViewBase">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:onClick="@{() -> viewmodel.onClickEditTextBaseValue()}"
+                            android:text="@{viewmodel.editTextBaseValue}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerBaseCurrency"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:entries="@array/currencies_array_base"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageViewBase"
+                        app:layout_constraintEnd_toEndOf="@+id/editTextBase"
+                        app:layout_constraintStart_toStartOf="@id/editTextBase"
+                        app:layout_constraintTop_toBottomOf="@id/editTextBase" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewTarget"
+                android:layout_width="match_parent"
+                android:layout_height="156dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewBase">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imageViewTarget"
+                        style="@style/ShapeableImageView"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_ar" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/editTextTarget"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/exchange"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imageViewTarget"
+                        app:layout_constraintTop_toTopOf="@+id/imageViewTarget">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:onClick="@{() -> viewmodel.onClickEditTextTargetValue()}"
+                            android:text="@{viewmodel.editTextTargetValue}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerTargetCurrency"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:entries="@array/currencies_array_target"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageViewTarget"
-                    app:layout_constraintEnd_toEndOf="@id/editTextTarget"
-                    app:layout_constraintStart_toStartOf="@id/editTextTarget"
-                    app:layout_constraintTop_toBottomOf="@id/editTextTarget" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerTargetCurrency"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:entries="@array/currencies_array_target"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageViewTarget"
+                        app:layout_constraintEnd_toEndOf="@id/editTextTarget"
+                        app:layout_constraintStart_toStartOf="@id/editTextTarget"
+                        app:layout_constraintTop_toBottomOf="@id/editTextTarget" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    </layout>

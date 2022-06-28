@@ -7,8 +7,10 @@
     android:id="@+id/containerFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.currencyexchangecalculator.MainScreenFragment"
-    tools:context=".MainActivity"
+    android:name="com.currencyexchangeapp.currencyexchangecalculator.MainScreenFragment"
+    tools:context="com.currencyexchangeapp.currencyexchangecalculator.MainActivity"
     tools:layout="@layout/fragment_main_screen">
+
+
 
 </androidx.fragment.app.FragmentContainerView>

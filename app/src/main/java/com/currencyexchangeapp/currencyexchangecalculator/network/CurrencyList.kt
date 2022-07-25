@@ -11,13 +11,17 @@ data class CurrencyList(
 )
 
 class Rates(
+    /*
     @Json(name = "AED") val aed: Double,
     @Json(name = "AFN") val afn: Double,
     @Json(name = "ALL") val all: Double,
     @Json(name = "AMD") val amd: Double,
     @Json(name = "ANG") val ang: Double,
     @Json(name = "AOA") val aoa: Double,
+
+     */
     @Json(name = "ARS") val ars: Double,
+    /*
     @Json(name = "AUD") val aud: Double,
     @Json(name = "AWG") val awd: Double,
     @Json(name = "AZN") val azn: Double,
@@ -31,7 +35,9 @@ class Rates(
     @Json(name = "BMD") val bmd: Double,
     @Json(name = "BND") val bnd: Double,
     @Json(name = "BOB") val bob: Double,
+    */
     @Json(name = "BRL") val brl: Double,
+    /*
     @Json(name = "BSD") val bsd: Double,
     @Json(name = "BTC") val btc: Double,
     @Json(name = "BTN") val btn: Double,
@@ -39,8 +45,10 @@ class Rates(
     @Json(name = "BYN") val byn: Double,
     @Json(name = "BYR") val byr: Double,
     @Json(name = "BZD") val bzd: Double,
+    */
 
     @Json(name = "CAD") val cad: Double,
+    /*
     @Json(name = "CDF") val cdf: Double,
     @Json(name = "CHF") val chf: Double,
     @Json(name = "CLF") val clf: Double,
@@ -61,12 +69,16 @@ class Rates(
     @Json(name = "EGP") val egp: Double,
     @Json(name = "ERN") val ern: Double,
     @Json(name = "ETB") val etb: Double,
+    */
     @Json(name = "EUR") val eur: Double,
-
+    /*
     @Json(name = "FJD") val fjd: Double,
     @Json(name = "FKP") val fkp: Double,
+    */
 
     @Json(name = "GBP") val gbp: Double,
+
+    /*
     @Json(name = "GEL") val gel: Double,
     @Json(name = "GGP") val ggp: Double,
     @Json(name = "GHS") val ghs: Double,
@@ -173,18 +185,19 @@ class Rates(
     @Json(name = "TMT") val tnt: Double,
     @Json(name = "TND") val tnd: Double,
     @Json(name = "TOP") val top: Double,
-    @Json(name = "TRY") val tryy: Double,
+    @Json(name = "TRY") val try: Double,
     @Json(name = "TTD") val ttd: Double,
     @Json(name = "TWD") val twd: Double,
     @Json(name = "TZS") val tzs: Double,
 
     @Json(name = "UAH") val uah: Double,
     @Json(name = "UGX") val ugx: Double,
+    */
     @Json(name = "USD") val usd: Double,
+    /*
     @Json(name = "UYU") val uyu: Double,
     @Json(name = "UZS") val uzs: Double,
 
-    @Json(name = "VEF") val vef: Double,
     @Json(name = "VND") val vnd: Double,
     @Json(name = "VUV") val vuv: Double,
 
@@ -204,5 +217,6 @@ class Rates(
     @Json(name = "ZMK") val zmk: Double,
     @Json(name = "ZMW") val zmw: Double,
     @Json(name = "ZWL") val zwl: Double
+    */
 )
 

@@ -1,15 +1,21 @@
 package com.currencyexchangeapp.currencyexchangecalculator
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.currencyexchangeapp.currencyexchangecalculator.databinding.FragmentMainScreenBinding
@@ -44,6 +50,7 @@ class MainScreenFragment : Fragment() {
         binding.lifecycleOwner = this
         //binding viewModel
         binding.viewmodel = viewModel
+
 
         /**
          * Create Spinner Base
@@ -164,8 +171,6 @@ class MainScreenFragment : Fragment() {
             }
         })
 
-
         return binding.root
     }
-
 }

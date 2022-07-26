@@ -10,6 +10,7 @@
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_baseline_flag_24.xml" value="0.1388888888888889" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_br.xml" value="0.22777777777777777" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_ca.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_connection_error.xml" value="0.1484375" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_eu.xml" value="0.18796296296296297" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_exchange__3_.xml" value="0.19907407407407407" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_gb.xml" value="0.18796296296296297" />
@@ -17,7 +18,7 @@
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.19907407407407407" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/drawable/ic_us.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/layout/activity_main.xml" value="0.2391304347826087" />
-        <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/layout/fragment_main_screen.xml" value="0.19047619047619047" />
+        <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/layout/fragment_main_screen.xml" value="0.264" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/layout/toolbar.xml" value="0.2036144578313253" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.225" />
         <entry key="..\:/Users/lossr/AndroidStudioProjects/CurrencyExchangeCalculator/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19907407407407407" />

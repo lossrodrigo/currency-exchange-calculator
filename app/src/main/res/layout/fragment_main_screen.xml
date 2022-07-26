@@ -25,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="64dp">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewBase"
                 android:layout_width="match_parent"
@@ -35,7 +36,8 @@
                 app:layout_constraintBottom_toTopOf="@id/cardViewTarget"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:apiStatus3="@{viewmodel.statusApi}">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -94,7 +96,8 @@
                 app:cardElevation="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardViewBase">
+                app:layout_constraintTop_toBottomOf="@id/cardViewBase"
+                app:apiStatus4="@{viewmodel.statusApi}">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -142,5 +145,26 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/error_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:apiStatus="@{viewmodel.statusApi}"
+            tools:src="@drawable/ic_connection_error"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/error_iv"
+            app:layout_constraintStart_toStartOf="@id/error_iv"
+            app:layout_constraintEnd_toEndOf="@id/error_iv"
+            android:hint="No internet connection"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:apiStatus2="@{viewmodel.statusApi}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     </layout>

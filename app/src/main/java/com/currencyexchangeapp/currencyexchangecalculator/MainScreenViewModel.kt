@@ -9,7 +9,13 @@ import com.currencyexchangeapp.currencyexchangecalculator.network.CurrencyList
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
+//Create a API status with ERROR and DONE states
+enum class ApiStatus {ERROR, DONE}
+
 class MainScreenViewModel : ViewModel() {
+
+    private val _statusApi = MutableLiveData<ApiStatus>()
+    val statusApi: LiveData<ApiStatus> = _statusApi
 
     private val _currencies = MutableLiveData<CurrencyList>()
 
@@ -61,10 +67,12 @@ class MainScreenViewModel : ViewModel() {
     private fun currencyQuotation() {
         viewModelScope.launch {
             try {
+                _statusApi.value = ApiStatus.DONE
                 val listResult = CurrenciesQuotationsApi.retrofitService.getCurrenciesQuotations()
                 _currencies.value = listResult
 
             } catch (e: Exception) {
+                _statusApi.value = ApiStatus.ERROR
                 _response.value = "Failure: ${e.message}"
             }
         }

@@ -1,5 +1,5 @@
 # Currency-exchange-calculator
-:moneybag: This is a exchange currency calculator app that uses a external API to convert currencies. :credit_card:
+:moneybag: A currency calculator app that uses an external API to convert currencies. :credit_card:
 
 
 <img src="https://github.com/lossrodrigo/currency-exchange-calculator/blob/master/Screenshot_20220628_145235.png" alt="alt text" width="400" height="800"> 
